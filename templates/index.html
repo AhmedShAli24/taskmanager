@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+       <table>
+        <tr>
+            <th>Tasks</th>
+            <th>Completed</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+       
+        {% for task in all_tasks%}
+        <tr>
+            <td>{{task["description"]}}</td>
+            {% if task["completed"] == 0 %}
+            <td>Incomplete</td>
+            {%else%}
+            <td>Completed</td>
+            {% endif %}
+            <td>{{task["date_created"]}}</td>
+            <td><a href={{url_for('update', id = task["id"])}}>Update</td>
+            <td><a href={{url_for('delete', id = task["id"])}}>Delete</a></td>
+        <tr>
+        {%endfor%}
+
+       </table>
+
+       <form action="/" method="POST">
+        <input type="text" name="task"> 
+        <input type="submit" value ="submit">
+       </form>
+        
+    </body>
+</html>
